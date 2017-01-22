@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<remote_caches>
+	<remote_cache>
+		<app_id>PDM</app_id>
+		<servers>localhost:11211</servers>
+		<weights>3</weights>
+		<init_conn>1</init_conn>
+		<min_conn>1</min_conn>
+		<max_conn>10</max_conn>
+		<max_idle>1800000</max_idle>
+		<max_busy_time>300000</max_busy_time>
+		<maint_sleep>0</maint_sleep>
+		<socket_time_out>500000</socket_time_out>
+		<socket_connect_time_out>0</socket_connect_time_out>
+		<nagle>false</nagle>
+		<failover>false</failover>
+		<failback>false</failback>
+		<alive_check>true</alive_check>
+	</remote_cache>
+</remote_caches>

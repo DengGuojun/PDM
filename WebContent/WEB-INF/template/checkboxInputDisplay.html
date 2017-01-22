@@ -1,0 +1,28 @@
+<meta charset="utf-8" />
+<#assign size= "">
+<#if styleMap.size??>
+<#assign size = styleMap.size>
+</#if>
+
+<#assign propertyValue= Property.propertyValue1>
+<#if isSubType==true>
+<#assign propertyValue= Property.propertyValue2>
+</#if>
+<#if (propertyValue == "") && PropertyType.defaultValue!="">
+<#assign propertyValue= PropertyType.defaultValue>
+</#if>
+
+<#if propertyValue==(isTrue+"")>
+	<#if isSubType==true>
+	<input type="checkbox" id="SUB_PROPERTY_${PropertyType.propertyCode}" name="SUB_PROPERTY_${PropertyType.propertyCode}" value="${isTrue}" checked="checked"/>
+	<#else>
+	<input type="checkbox" id="PROPERTY_${PropertyType.propertyCode}" name="PROPERTY_${PropertyType.propertyCode}"  id="${PropertyType.propertyCode}" value="${isTrue}" checked="checked" />
+	</#if>
+<#else>
+	<#if isSubType==true>
+	<input type="checkbox"  id="SUB_PROPERTY_${PropertyType.propertyCode}" name="SUB_PROPERTY_${PropertyType.propertyCode}" value="${isTrue}"/>
+	<#else>
+	<input type="checkbox"  id="PROPERTY_${PropertyType.propertyCode}" name="PROPERTY_${PropertyType.propertyCode}" value="${isTrue}"/>
+	</#if>
+</#if>
+&nbsp;&nbsp;${PropertyType.inputDesc}

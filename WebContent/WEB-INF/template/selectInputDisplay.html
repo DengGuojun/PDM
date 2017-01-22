@@ -1,0 +1,42 @@
+<meta charset="utf-8" />
+<#assign spanContent= "">
+<#if PropertyType.getIsModifiable()!=isTrue>
+<#assign spanContent= "onmousemove='this.setCapture();' onmouseout='this.releaseCapture();' onfocus='this.blur();'">
+</#if>
+
+<#assign size= "">
+<#if styleMap.size??>
+<#assign size = styleMap.size>
+</#if>
+
+<#assign propertyValue= Property.propertyValue1>
+<#if isSubType==true>
+<#assign propertyValue= Property.propertyValue2>
+</#if>
+<#if (propertyValue == "" || propertyValue == "0") && PropertyType.getDefaultValue()!="">
+<#assign propertyValue= PropertyType.getDefaultValue()>
+</#if>
+<span ${spanContent}>
+<#if PropertyType.isRequired==isTrue>
+	<#if isSubType==true>
+		<select size="${size}" name="SUB_PROPERTY_${PropertyType.propertyCode}" id="SUB_${PropertyType.propertyCode}" checkStr="${PropertyType.propertyName};txt;true;;100">
+	<#else>
+		<select size="${size}" name="PROPERTY_${PropertyType.propertyCode}" id="${PropertyType.propertyCode}" checkStr="${PropertyType.propertyName};txt;true;;100">
+	</#if>
+<#else>
+	<#if isSubType==true>
+		<select size="${size}" name="SUB_PROPERTY_${PropertyType.propertyCode}" id="SUB_${PropertyType.propertyCode}" checkStr="${PropertyType.propertyName};txt;false;;100">
+	<#else>
+		<select size="${size}" name="PROPERTY_${PropertyType.propertyCode}" id="${PropertyType.propertyCode}" checkStr="${PropertyType.propertyName};txt;false;;100">
+	</#if>
+</#if>
+	<option value="">请选择</option>
+		<#list PropertyOptionList as option>
+			<#if option.optionValue+''==propertyValue+''>
+			<option value="${option.optionValue}" selected="selected">${option.optionContent}</option>
+			<#else>
+	    	<option value="${option.optionValue}">${option.optionContent}</option>
+	    	</#if>
+	   	</#list>
+</select>
+&nbsp;&nbsp;${PropertyType.inputDesc}

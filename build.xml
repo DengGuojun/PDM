@@ -1,0 +1,38 @@
+﻿<?xml version="1.0"?>
+
+<project name="PDM" default="${client.jar}" basedir=".">
+
+	<!-- dir/file define -->
+	<property name="build.dir" value="WebContent/WEB-INF/classes/"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="client.jar" value="lpmas-pdm-client-0.2.0.jar"/>
+
+	<target name="prepare">
+		<mkdir dir="${dist.dir}"/>
+		<delete>
+			<fileset dir="${dist.dir}">
+				<include name="${dist.jar}"/>
+			</fileset>
+		</delete>
+	</target>
+	
+	<target name="${client.jar}" depends="prepare">
+		<jar jarfile="${dist.dir}/${client.jar}">
+			<fileset dir="${build.dir}" >
+				<include name="com/lpmas/pdm/bean/**"/>
+				<include name="com/lpmas/pdm/client/**"/>
+				<include name="com/lpmas/pdm/component/**"/>
+				<include name="com/lpmas/pdm/config/PdmClientConfig.class"/>
+				<include name="com/lpmas/pdm/config/PdmCacheClientConfig.class"/>
+				<include name="com/lpmas/pdm/config/ProductPropertyConfig.class"/>
+				<include name="com/lpmas/pdm/config/MaterialPropertyConfig.class"/>
+				<include name="com/lpmas/pdm/config/PdmConfig.class"/>
+				<include name="com/lpmas/pdm/config/ProductImageConfig.class"/>
+				<include name="com/lpmas/pdm/config/MaterialImageConfig.class"/>
+				<include name="com/lpmas/pdm/business/WareInfoMediator.class"/>
+				<exclude name="com/lpmas/pdm/component/impl/**"/>
+			</fileset>
+		</jar>
+	</target>
+	
+</project>

@@ -1,0 +1,79 @@
+<meta charset="utf-8" />
+<#import "header.html" as header/>
+<#assign fieldType= "txt">
+<#if PropertyType.getFieldType()==number>
+<#assign fieldType= "num">
+</#if>
+
+<#assign propertyCode= PropertyType.propertyCode>
+
+<#assign maxlength= "200">
+<#if styleMap.maxlength??>
+<#assign maxlength = styleMap.maxlength>
+</#if>
+
+<#assign size= "">
+<#if styleMap.size??>
+<#assign size = styleMap.size>
+</#if>
+
+<#assign propertyValue= Property.propertyValue1>
+<#if isSubType==true>
+<#assign propertyValue= Property.propertyValue2>
+</#if>
+<#if propertyValue == "" && PropertyType.getDefaultValue()!="">
+<#assign propertyValue= PropertyType.getDefaultValue()>
+</#if>
+<em id="show">${propertyValue}</em>
+<#if PropertyType.isRequired==isTrue>
+	<#if isSubType==true>
+	<input type="hidden" name="SUB_PROPERTY_${propertyCode}" id="${propertyCode}"   value="${propertyValue}" checkStr="${PropertyType.propertyName};${fieldType};true;;${maxlength}"/>
+    <input id="BTN_${propertyCode}" type="button" class="search_btn_group" value="浏览..." />
+	<#else>
+    <input type="hidden" name="PROPERTY_${propertyCode}" id="${propertyCode}"  value="${propertyValue}" checkStr="${PropertyType.propertyName};${fieldType};true;;${maxlength}"/>
+    <input id="BTN_${propertyCode}" type="button" class="search_btn_group" value="浏览..." />
+	</#if>
+<#else>
+	<#if isSubType==true>
+	<input type="hidden" name="SUB_PROPERTY_${propertyCode}" id="${propertyCode}"  size="${size}" maxlength="${maxlength}"  value="${propertyValue}" checkStr="${PropertyType.propertyName};${fieldType};false;;${maxlength}"/>
+    <input id="BTN_${propertyCode}" type="button" class="search_btn_group" value="浏览..." />
+	<#else>
+	<input type="hidden" name="PROPERTY_${propertyCode}" id="${propertyCode}"  size="${size}" maxlength="${maxlength}"  value="${propertyValue}" checkStr="${PropertyType.propertyName};${fieldType};false;;${maxlength}"/>
+    <input id="BTN_${propertyCode}" type="button" class="search_btn_group" value="浏览..." />
+	</#if>
+</#if>
+<script type='text/javascript' src="${header.static_url}/js/fancyBox/jquery.fancybox.js"></script>
+<link rel="stylesheet" href="${header.static_url}/js/fancyBox/jquery.fancybox.css" type="text/css" media="screen" />
+<script type='text/javascript'>
+$(document).ready(function() {
+	var value = '${propertyValue}';
+	$("#BTN_${propertyCode}").click(
+		function() {
+			value = jQuery('#${propertyCode}').val();
+			$.fancybox.open({
+				href : '${PropertyType.fieldSource}&value='+value,
+				type : 'iframe',
+				width : 560,
+				minHeight : 500
+		});
+	});
+	var array = value.split(";");
+	var result = "";
+	for(var i=0;i<array.length;i++){
+        array[i] = array[i].replace(/,/g,"");
+        result += array[i]+ "   ";
+    }
+	jQuery("#show").html(result);
+});
+function callbackFunParentMenu(value) {
+	jQuery("#${propertyCode}").val(value);
+	var array = value.split(";");
+	var result = "";
+	for(var i=0;i<array.length;i++){
+        array[i] = array[i].replace(/,/g,"");
+        result += array[i]+ "   ";
+    }
+	jQuery("#show").html(result);
+}
+</script>
+&nbsp;&nbsp;${PropertyType.inputDesc}

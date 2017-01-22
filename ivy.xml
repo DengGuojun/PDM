@@ -1,0 +1,49 @@
+<ivy-module version="1.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"            
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info organisation="trendy" module="poc_test"/>
+
+	<configurations>
+		<include file="../IVY_LIB/default-ivy-configurations.xml"/>
+	</configurations>
+     
+	<dependencies>
+		<dependency org="apache" name="commons-logging" rev="1.2" transitive="false"/>
+		<dependency org="apache" name="commons-beanutils" rev="1.9.2" transitive="false"/>
+		<dependency org="apache" name="commons-collections" rev="3.2.1" transitive="false"/>
+		<dependency org="apache" name="commons-pool" rev="1.6" transitive="false"/>
+		<dependency org="apache" name="commons-pool2" rev="2.4.2" transitive="false"/>
+		
+		<dependency org="apache" name="log4j-api" rev="2.4.1" transitive="false"/>
+		<dependency org="apache" name="log4j-core" rev="2.4.1" transitive="false"/>
+		<dependency org="apache" name="log4j-slf4j-impl" rev="2.4.1" transitive="false"/>
+		<dependency org="slf4j" name="slf4j-api" rev="1.7.12" transitive="false"/>
+		
+		<dependency org="dom4j" name="dom4j" rev="2.0.0" transitive="false"/>
+		<dependency org="freemarker" name="freemarker" rev="2.3.23" transitive="false"/>
+		<dependency org="logicalcobwebs" name="proxool-cglib" rev="0.9.1" transitive="false"/>
+		<dependency org="logicalcobwebs" name="proxool" rev="0.9.1" transitive="false"/>
+		
+		<dependency org="mysql" name="mysql-connector-java" rev="5.1.37" transitive="false"/>	
+		<dependency org="zeroc" name="ice" rev="3.6.1" transitive="false"/>
+		<dependency org="danga" name="java-memcached" rev="2.6.6" transitive="false"/>		
+		<dependency org="fastxml" name="jackson-core" rev="2.7.0" transitive="false"/>
+		<dependency org="fastxml" name="jackson-annotations" rev="2.7.0" transitive="false"/>
+		<dependency org="fastxml" name="jackson-databind" rev="2.7.0" transitive="false"/>
+		
+		<dependency org="freemarker" name="freemarker" rev="2.3.23" transitive="false"/>
+		<dependency org="opensymphony" name="oscache" rev="2.4.1" transitive="false"/>
+		<dependency org="lpmas" name="lpmas-framework" rev="1.0.1" transitive="false"/>
+		<dependency org="lpmas" name="lpmas-component-server" rev="0.1.0" transitive="false"/>
+		<dependency org="lpmas" name="lpmas-admin-client" rev="1.0.0" transitive="false"/>
+		<dependency org="lpmas" name="lpmas-file-client" rev="0.1.0" transitive="false"/>
+		<dependency org="lpmas" name="lpmas-region-client" rev="0.1.0" transitive="false"/>
+		<dependency org="lpmas" name="lpmas-constant" rev="1.0.0" transitive="false"/>
+		<dependency org="lpmas" name="lpmas-log-client" rev="0.1.0" transitive="false"/>
+		<dependency org="lpmas" name="lpmas-system-client" rev="1.1.0" transitive="false"/>
+		<dependency org="apache" name="activemq-client" rev="5.13.2" transitive="false"/>
+		<dependency org="apache" name="geronimo-j2ee-management" rev="1.1" transitive="false"/>
+		<dependency org="lpmas" name="lpmas-system-client" rev="0.1.0" transitive="false"/>
+	</dependencies>
+        
+</ivy-module>		

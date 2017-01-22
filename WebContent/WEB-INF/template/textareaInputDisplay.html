@@ -1,0 +1,45 @@
+<meta charset="utf-8" />
+<#assign fieldType= "txt">
+<#if PropertyType.getFieldType()==number>
+<#assign fieldType= "num">
+</#if>
+
+<#assign readonly= "">
+<#if PropertyType.getIsModifiable()!=isTrue>
+<#assign readonly= "readonly">
+</#if>
+<#assign propertyCode= PropertyType.propertyCode>
+
+<#assign maxlength= "200">
+<#if styleMap.maxlength??>
+<#assign maxlength = styleMap.maxlength>
+</#if>
+
+<#assign size= "">
+<#if styleMap.size??>
+<#assign size = styleMap.size>
+</#if>
+
+<#assign propertyValue= Property.propertyValue1>
+<#if isSubType==true>
+<#assign propertyValue= Property.propertyValue2>
+</#if>
+<#if propertyValue == "" && PropertyType.getDefaultValue()!="">
+<#assign propertyValue= PropertyType.getDefaultValue()>
+</#if>
+
+<#if PropertyType.isRequired==isTrue>
+	<#if isSubType==true>
+	<textarea name="SUB_PROPERTY_${propertyCode}" id="SUB_${propertyCode}" cols="60" rows="3"  ${readonly} checkStr="${PropertyType.propertyName};${fieldType};true;;${maxlength}">${propertyValue}</textarea>
+	<#else>
+	<textarea name="PROPERTY_${propertyCode}" id="${propertyCode}" cols="60" rows="3"  ${readonly} checkStr="${PropertyType.propertyName};${fieldType};true;;${maxlength}">${propertyValue}</textarea>
+	</#if>
+<#else>
+	<#if isSubType==true>
+	<textarea name="SUB_PROPERTY_${propertyCode}" id="SUB_${propertyCode}" cols="60" rows="3"  ${readonly} checkStr="${PropertyType.propertyName};${fieldType};false;;${maxlength}">${propertyValue}</textarea>
+	<#else>
+	<textarea name="PROPERTY_${propertyCode}" id="${propertyCode}" cols="60" rows="3"  ${readonly} checkStr="${PropertyType.propertyName};${fieldType};false;;${maxlength}">${propertyValue}</textarea>
+	</#if>
+
+</#if>
+&nbsp;&nbsp;${PropertyType.inputDesc}

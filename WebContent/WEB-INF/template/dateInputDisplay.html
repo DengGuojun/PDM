@@ -1,0 +1,39 @@
+<#assign readonly= "">
+<#assign onclick= "WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'2008-01-01',maxDate:'2020-01-01'})">
+<#if PropertyType.getIsModifiable()!=isTrue>
+<#assign readonly= "readonly">
+<#assign onclick= "">
+</#if>
+
+<#assign propertyValue= Property.propertyValue1>
+<#if isSubType==true>
+<#assign propertyValue= Property.propertyValue2>
+</#if>
+<#if propertyValue == "" && PropertyType.getDefaultValue()!="">
+<#assign propertyValue= PropertyType.getDefaultValue()>
+</#if>
+
+<#assign maxlength= "200">
+<#if styleMap.maxlength??>
+<#assign maxlength = styleMap.maxlength>
+</#if>
+
+<#assign size= "">
+<#if styleMap.size??>
+<#assign size = styleMap.size>
+</#if>
+
+<#if PropertyType.isRequired==isTrue>
+	<#if isSubType==true>
+	<input size="${size}" name="SUB_PROPERTY_${PropertyType.propertyCode}" maxlength="${maxlength}" ${readonly} onclick="${onclick}" id="SUB_${PropertyType.propertyCode}" value="${propertyValue}" checkStr="${PropertyType.propertyName};txt;true;;${maxlength}" />
+	<#else>
+	<input size="${size}" name="PROPERTY_${PropertyType.propertyCode}" maxlength="${maxlength}" ${readonly} onclick="${onclick}" id="${PropertyType.propertyCode}" value="${propertyValue}" checkStr="${PropertyType.propertyName};txt;true;;${maxlength}" />
+	</#if>
+<#else>
+	<#if isSubType==true>
+	<input size="${size}" name="SUB_PROPERTY_${PropertyType.propertyCode}" maxlength="${maxlength}" ${readonly} onclick="${onclick}" id="SUB_${PropertyType.propertyCode}" value="${propertyValue}" checkStr="${PropertyType.propertyName};txt;false;;${maxlength}" />
+	<#else>
+	<input size="${size}" name="PROPERTY_${PropertyType.propertyCode}" maxlength="${maxlength}" ${readonly} onclick="${onclick}" id="${PropertyType.propertyCode}" value="${propertyValue}" checkStr="${PropertyType.propertyName};txt;false;;${maxlength}" />
+	</#if>
+</#if>
+&nbsp;&nbsp;${PropertyType.inputDesc}

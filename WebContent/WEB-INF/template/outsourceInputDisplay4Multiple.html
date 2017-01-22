@@ -1,0 +1,66 @@
+<meta charset="utf-8" />
+<#import "header.html" as header/>
+<#assign fieldType= "txt">
+<#if productPropertyType.getFieldType()==number>
+<#assign fieldType= "num">
+</#if>
+
+<#assign propertyCode= productPropertyType.propertyCode>
+
+<#assign maxlength= "200">
+<#if styleMap.maxlength??>
+<#assign maxlength = styleMap.maxlength>
+</#if>
+
+<#assign size= "">
+<#if styleMap.size??>
+<#assign size = styleMap.size>
+</#if>
+
+<#assign multipleValue= multipleValue>
+<#if multipleValue == "" && productPropertyType.getDefaultValue()!="">
+<#assign multipleValue= productPropertyType.getDefaultValue()>
+</#if>
+<em id="show_multiple"></em>
+<#if productPropertyType.isRequired==isTrue>
+    <input type="hidden" name="MULTIPLE_PROPERTY_${propertyCode}" id="${propertyCode}"  value="${multipleValue}" checkStr="${productPropertyType.propertyName};${fieldType};true;;${maxlength}"/>
+    <input id="BTN_${propertyCode}" type="button" class="search_btn_group" value="浏览..." />
+<#else>
+	<input type="hidden" name="MULTIPLE_PROPERTY_${propertyCode}" id="${propertyCode}"  size="${size}" maxlength="${maxlength}"  value="${multipleValue}" checkStr="${productPropertyType.propertyName};${fieldType};false;;${maxlength}"/>
+    <input id="BTN_${propertyCode}" type="button" class="search_btn_group" value="浏览..." />
+</#if>
+<script type='text/javascript' src="${header.static_url}/js/fancyBox/jquery.fancybox.js"></script>
+<link rel="stylesheet" href="${header.static_url}/js/fancyBox/jquery.fancybox.css" type="text/css" media="screen" />
+<script type='text/javascript'>
+$(document).ready(function() {
+	var value = '${multipleValue}';
+	$("#BTN_${propertyCode}").click(
+		function() {
+			value = jQuery('#${propertyCode}').val();
+			$.fancybox.open({
+				href : '${productPropertyType.fieldSource}&value='+value,
+				type : 'iframe',
+				width : 560,
+				minHeight : 500
+		});
+	});
+	var array = value.split(";");
+	var result = "";
+	for(var i=0;i<array.length;i++){
+        array[i] = array[i].replace(/,/g,"");
+        result += array[i]+ "   ";
+    }
+	jQuery("#show_multiple").html(result);
+});
+function callbackFunParentMenu4Multiple(value) {
+	jQuery("#${propertyCode}").val(value);
+	var array = value.split(";");
+	var result = "";
+	for(var i=0;i<array.length;i++){
+        array[i] = array[i].replace(/,/g,"");
+        result += array[i]+ "   ";
+    }
+	jQuery("#show_multiple").html(result);
+}
+</script>
+&nbsp;&nbsp;${productPropertyType.inputDesc}

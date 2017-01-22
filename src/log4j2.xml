@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" shutdownHook="disable">
+	<properties>
+		<property name="LOG_HOME">/Users/andrew/longping/Logs/pdm</property>
+		<property name="PATTERN_LAYOUT">%-r %d [%t] %level %C.%M(%F:%line) - %m%n</property>
+		<property name="FILE_PATTERN">%d{yyyy-MM-dd}</property>
+		<property name="DEFAULT_LOG_LEVEL">info</property>
+	</properties>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%m%n" />
+		</Console>
+		<RollingFile name="rootLog" fileName="${LOG_HOME}/root.log" filePattern="${LOG_HOME}/root.log.${FILE_PATTERN}">
+			<PatternLayout pattern="${PATTERN_LAYOUT}" />
+			<TimeBasedTriggeringPolicy interval="24" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="error">
+			<AppenderRef ref="console" />
+		</Root>
+		<logger name="com.lpmas" level="${DEFAULT_LOG_LEVEL}" additivity="false">
+			<AppenderRef ref="rootLog" />
+		</logger>
+	</Loggers>
+</Configuration>
